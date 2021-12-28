@@ -5,16 +5,14 @@ leftWristY = 0;
 rightWristX = 0;
 rightWristY = 0;
 
-function preload()
-{
+function preload() {
 
     soundFormats('mp3', 'ogg');
     music1 = loadSound(music.mp3);
     music2 = loadSound(music2.mp3);
 }
 
-function setup()
-{
+function setup() {
     canvas = createCanvas(600, 450);
     canvas.center();
 
@@ -25,37 +23,32 @@ function setup()
     poseNet.on('poses', gotPoses);
 }
 
-function gotPoses(results)
-{
-    if(results > 0)
-    {
+function gotPoses(results) {
+    if (results > 0) {
         console.log(results);
         leftWristX = result[0].pose.leftWrist.x;
         leftWristY = result[0].pose.leftWrist.y;
-        console.log("leftWristX = "+ leftWristX +"leftWristY"+ rightWristY);
+        console.log("leftWristX = " + leftWristX + "leftWristY" + rightWristY);
 
         rightWristX = result[0].pose.rightWrist.x;
         rightWristY = result[0].pose.rightWrist.y;
-        console.log("rightWristX = "+ leftWristX +"rightWristY"+ rightWristY);
+        console.log("rightWristX = " + leftWristX + "rightWristY" + rightWristY);
 
     }
 }
 
-function modelLoaded()
-{
+function modelLoaded() {
     console.log('PoseNet is Initializes');
 }
 
-function draw()
-{
+function draw() {
     image(video, 0, 0, 600, 500);
 }
 
-function play()
- {
-     song.play();
-     song.setVolume(1);
-     song.rate(1);
- }
+function play() {
+    song.play();
+    song.setVolume(1);
+    song.rate(1);
+}
 
 //  setup();
