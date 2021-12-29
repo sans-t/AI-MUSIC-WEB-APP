@@ -1,9 +1,16 @@
 music1 = "";
 music2 = "";
+
+music_status1 = "";
+music_status2 = "";
+
 leftWristX = 0;
 leftWristY = 0;
+
 rightWristX = 0;
 rightWristY = 0;
+
+scoreLeftWrist = 0;
 
 function preload() {
 
@@ -26,6 +33,9 @@ function setup() {
 function gotPoses(results) {
     if (results > 0) {
         console.log(results);
+        scoreLeftWrist = results[0].pose.keypoints[9].score;
+        console.log("scoreLeftWrist"+ scoreLeftWrist);
+
         leftWristX = result[0].pose.leftWrist.x;
         leftWristY = result[0].pose.leftWrist.y;
         console.log("leftWristX = " + leftWristX + "leftWristY" + rightWristY);
@@ -43,12 +53,27 @@ function modelLoaded() {
 
 function draw() {
     image(video, 0, 0, 600, 500);
+
+    fill("#FF0000");
+    stroke("#FF0000");
+
+    if(scoreLeftWrist > 0)
+    {
+        circle(leftWristX, leftWristY, 20);
+
+        music1.stop();
+
+        if(music_status2 == false)
+        {
+            music2.play();
+            document.getElementById("song_name").innerHTML  = "Playing - Harry Potter theme Song";
+
+        }
+    }
+
+
 }
 
-function play() {
-    song.play();
-    song.setVolume(1);
-    song.rate(1);
-}
 
-//  setup();
+
+
